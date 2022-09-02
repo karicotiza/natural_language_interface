@@ -47,8 +47,23 @@ class SearchEngine:
 
     @staticmethod
     def trim(results: pd.DataFrame, amount_of_results: int) -> pd.DataFrame:
-        return results.sort_values("Overall Score", ascending=False).head(amount_of_results)
+        return results.sort_values("Overall Score", ascending=False, ignore_index=True).head(amount_of_results)
+
+
+def get_title(results: pd.DataFrame, index) -> str:
+    return results["Title"].iloc[index]
+
+
+def get_url(results: pd.DataFrame, index) -> str:
+    return results["URL"].iloc[index]
+
+
+def get_summary(results: pd.DataFrame, index) -> str:
+    return results["Summary"].iloc[index]
 
 
 search_engine = SearchEngine("data")
-print(search_engine.search("Albedo Alabama party", 10))
+search_result = search_engine.search("superhero movie", 10)
+
+print(search_result)
+print(get_summary(search_result, 0))
