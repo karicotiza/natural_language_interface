@@ -4,19 +4,18 @@ import pandas as pd
 
 
 class Crawler:
-    def __init__(self, attempts):
-        self.attempts = attempts
+    def __init__(self, attempts: int) -> None:
         self.columns = ["Title", "URL", "Summary"]
         self.database = pd.DataFrame(
             columns=self.columns,
         )
 
-        self.crawl()
-        self.fix_database()
+        self.crawl(attempts)
+        self.database.fillna(0, inplace=True)
         self.save_database()
 
-    def crawl(self):
-        for page_id in range(self.attempts):
+    def crawl(self, attempts: int) -> None:
+        for page_id in range(attempts):
             try:
                 page = wikipedia.page(pageid=page_id)
                 print(f"Страница {page_id} - {page.title}")
@@ -46,32 +45,31 @@ class Crawler:
                 print(f"Страница {page_id} не существует")
             except wikipedia.exceptions.PageError:
                 print(f"Страница {page_id} не существует")
+            except wikipedia.DisambiguationError:
+                print(f"Страница {page_id} не существует")
 
     @staticmethod
-    def tokenize(sentence):
+    def tokenize(sentence: str) -> dict:
         valid_parts_of_speech = ["NN", "NNS", "NNP", "NNPS"]
 
         tokenizer = nltk.TweetTokenizer()
         lemmatizer = nltk.wordnet.WordNetLemmatizer()
 
-        tokenized_sentence = tokenizer.tokenize(sentence)
-        tokenized_sentence = [word for word in tokenized_sentence if
-                              nltk.pos_tag([word])[0][1] in valid_parts_of_speech]
-        tokenized_sentence = [lemmatizer.lemmatize(word).lower() for word in tokenized_sentence]
+        sentence = tokenizer.tokenize(sentence)
+        sentence = [
+            word for word in sentence if nltk.pos_tag([word])[0][1] in valid_parts_of_speech
+        ]
+        sentence = [lemmatizer.lemmatize(word).lower() for word in sentence]
 
         frequency = dict(
-            (word, tokenized_sentence.count(word)) for word in set(tokenized_sentence)
+            (word, sentence.count(word)) for word in set(sentence)
         )
 
         return frequency
 
-    def fix_database(self):
-        # self.database.drop(["Summary"], axis=1, inplace=True)
-        self.database.fillna(0, inplace=True)
-
-    def save_database(self):
+    def save_database(self) -> None:
         self.database.to_csv("data.csv", index=False)
         self.database.to_feather("data")
 
 
-crawler = Crawler(40)
+crawler = Crawler(1500)
