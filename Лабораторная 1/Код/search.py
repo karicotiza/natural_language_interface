@@ -1,5 +1,6 @@
 import pandas as pd
 import math
+import preprocessing
 
 
 class SearchEngine:
@@ -15,47 +16,39 @@ class SearchEngine:
         return float(length / self.number_of_records)
 
     def search(self, query: str, amount_of_results: int) -> pd.DataFrame:
-        query = query.lower()
-        scores = pd.DataFrame()
-        if self.database.get([query][0], None) is not None:
-            contains = len(self.database[self.database[query] >= 1])
-            k1 = 2.0
-            b = 0.75
-            idf = math.log(
-                (self.number_of_records - contains + 0.5) /
-                (contains + 0.5)
-            )
+        query = preprocessing.normalize(query)
 
-            for record in range(self.number_of_records):
-                score = idf * (
-                        (self.database[query].iat[record] * (k1 + 1)) /
-                        (self.database[query].iat[record] + k1 * (
-                                1 - b + b * len(self.database["Summary"].iat[0].split()) / self.average_record_length)
-                         )
+        results = self.database[["Title", "URL", "Summary"]].copy()
+
+        for word in query:
+            if word in self.database.columns[2:]:
+                column = pd.DataFrame()
+                contains = len(self.database[self.database[word] >= 1])
+                k1 = 2.0
+                b = 0.75
+                idf = math.log(
+                    (self.number_of_records - contains + 0.5) /
+                    (contains + 0.5)
                 )
-                data = pd.DataFrame(
-                    columns=["Title", "URL", "Summary", "Score"],
-                    data=[[
-                        self.database["Title"].iat[record],
-                        self.database["URL"].iat[record],
-                        self.database["Summary"].iat[record],
-                        score
-                    ]]
-                )
-                scores = pd.concat([scores, data], axis=0, ignore_index=True)
 
-            return self.trim(scores, amount_of_results)
+                for record in range(self.number_of_records):
+                    score = idf * (
+                            (self.database[word].iat[record] * (k1 + 1)) /
+                            (self.database[word].iat[record] + k1 * (1 - b + b * len(
+                                self.database["Summary"].iat[0].split()) / self.average_record_length)
+                             )
+                    )
+                    column = pd.concat([column, pd.DataFrame([score])], axis=0, ignore_index=True)
 
-        else:
-            return pd.DataFrame(
-                columns=["Title", "URL", "Summary", "Score"],
-                data=[[None, None, None, None]]
-            )
+                results[word] = column
+
+        results["Overall Score"] = results.sum(numeric_only=True, axis=1)
+        return self.trim(results, amount_of_results)
 
     @staticmethod
     def trim(results: pd.DataFrame, amount_of_results: int) -> pd.DataFrame:
-        return results.sort_values("Score", ascending=False).head(amount_of_results)
+        return results.sort_values("Overall Score", ascending=False).head(amount_of_results)
 
 
 search_engine = SearchEngine("data")
-print(search_engine.search("Microsoft", 10))
+print(search_engine.search("Albedo Alabama party", 10))
