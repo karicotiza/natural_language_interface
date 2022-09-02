@@ -1,6 +1,6 @@
-import nltk
 import wikipedia
 import pandas as pd
+import preprocessing
 
 
 class Crawler:
@@ -50,16 +50,9 @@ class Crawler:
 
     @staticmethod
     def tokenize(sentence: str) -> dict:
-        valid_parts_of_speech = ["NN", "NNS", "NNP", "NNPS"]
+        sentence = preprocessing.normalize(sentence)
 
-        tokenizer = nltk.TweetTokenizer()
-        lemmatizer = nltk.wordnet.WordNetLemmatizer()
-
-        sentence = tokenizer.tokenize(sentence)
-        sentence = [
-            word for word in sentence if nltk.pos_tag([word])[0][1] in valid_parts_of_speech
-        ]
-        sentence = [lemmatizer.lemmatize(word).lower() for word in sentence]
+        print(sentence)
 
         frequency = dict(
             (word, sentence.count(word)) for word in set(sentence)
@@ -68,8 +61,8 @@ class Crawler:
         return frequency
 
     def save_database(self) -> None:
-        self.database.to_csv("data.csv", index=False)
-        self.database.to_feather("data")
+        self.database.to_csv("data1.csv", index=False)
+        self.database.to_feather("data1")
 
 
-crawler = Crawler(1500)
+crawler = Crawler(50)
