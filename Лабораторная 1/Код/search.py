@@ -43,11 +43,32 @@ class SearchEngine:
                 results[word] = column
 
         results["Overall Score"] = results.sum(numeric_only=True, axis=1)
+
         return self.trim(results)
 
     @staticmethod
     def trim(results: pd.DataFrame) -> pd.DataFrame:
         return results[results["Overall Score"] > 0].sort_values("Overall Score", ascending=False, ignore_index=True)
+
+
+def make_readable(results: pd.DataFrame) -> pd.DataFrame:
+    table_of_content = pd.DataFrame(
+        columns=["URL", "Keywords"]
+    )
+
+    for index, row, in results.iterrows():
+        url = row["URL"]
+        clean_row = row.to_frame().transpose()
+        clean_row = clean_row.replace(0, None).dropna(axis=1, how="all")
+        keywords = list(clean_row.columns[3:-1])
+
+        data = pd.DataFrame(
+            columns=table_of_content.columns,
+            data=[[url, keywords]]
+        )
+        table_of_content = pd.concat([table_of_content, data], axis=0, ignore_index=True)
+
+    return table_of_content
 
 
 def get_title(results: pd.DataFrame, index) -> str:
@@ -62,8 +83,10 @@ def get_summary(results: pd.DataFrame, index) -> str:
     return results["Summary"].iloc[index]
 
 
-search_engine = SearchEngine("data")
-search_result = search_engine.search("political party")
+search_engine = SearchEngine("data1")
+search_result = search_engine.search("popular music group from Sweden")
 
-print(search_result)
-print(get_summary(search_result, 15))
+print(make_readable(search_result))
+
+# for column in search_result.columns:
+#     print(search_result[column])
