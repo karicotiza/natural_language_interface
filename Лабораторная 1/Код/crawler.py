@@ -3,6 +3,7 @@ import math
 import pandas as pd
 import preprocessing
 from tqdm import tqdm
+import warnings
 
 
 class Crawler:
@@ -11,6 +12,10 @@ class Crawler:
         self.database = pd.DataFrame(
             columns=self.columns,
         )
+
+        # wikipedia module troubles
+        warnings.catch_warnings()
+        warnings.simplefilter("ignore")
 
         self.crawl(attempts)
         self.database.fillna(0, inplace=True)
@@ -42,6 +47,8 @@ class Crawler:
                     data = pd.concat([main_data, indexing_data], axis=1, ignore_index=False)
 
                     self.database = pd.concat([self.database, data], axis=0, ignore_index=True)
+
+            # wikipedia module troubles
             except AttributeError:
                 pass
             except wikipedia.exceptions.PageError:
@@ -68,7 +75,7 @@ class Crawler:
             self.database[column] *= coefficient
 
     def save_database(self) -> None:
-        tqdm(self.database.to_feather("data3"), desc="saving")
+        tqdm(self.database.to_feather("data stemmed"), desc="saving")
 
 
-crawler = Crawler(40)
+crawler = Crawler(5000)
