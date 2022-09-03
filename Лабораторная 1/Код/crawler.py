@@ -1,9 +1,10 @@
-import wikipedia
 import math
 import pandas as pd
 import preprocessing
-from tqdm import tqdm
 import warnings
+import wikipedia
+
+from tqdm import tqdm
 
 
 class Crawler:
@@ -75,7 +76,7 @@ class Crawler:
             self.database[column] *= coefficient
 
     def save_database(self) -> None:
-        tqdm(self.database.to_feather("data stemmed"), desc="saving")
+        tqdm(self.database.to_feather("data.feather"), desc="saving")
 
 
 crawler = Crawler(5000)
