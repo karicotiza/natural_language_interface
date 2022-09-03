@@ -1,6 +1,8 @@
 import wikipedia
+import math
 import pandas as pd
 import preprocessing
+from tqdm import tqdm
 
 
 class Crawler:
@@ -12,47 +14,44 @@ class Crawler:
 
         self.crawl(attempts)
         self.database.fillna(0, inplace=True)
+        self.set_weights()
         self.save_database()
 
     def crawl(self, attempts: int) -> None:
-        for page_id in range(attempts):
+        for page_id in tqdm(range(attempts), desc="indexing"):
             try:
                 page = wikipedia.page(pageid=page_id)
-                print(f"Страница {page_id} - {page.title}")
+                if preprocessing.is_article(page.title):
+                    main_data = pd.DataFrame(
+                        columns=self.columns,
+                        data=[
+                            [page.title, page.url, page.summary],
+                        ]
+                    )
 
-                main_data = pd.DataFrame(
-                    columns=self.columns,
-                    data=[
-                        [page.title, page.url, page.summary],
-                    ]
-                )
+                    tokenized_sentence = self.tokenize(
+                        main_data["Summary"].iat[-1]
+                    )
 
-                tokenized_sentence = self.tokenize(
-                    main_data["Summary"].iat[-1]
-                )
+                    indexing_data = pd.DataFrame(
+                        columns=tokenized_sentence.keys(),
+                        data=[tokenized_sentence.values()],
+                        dtype=pd.Int8Dtype
+                    )
 
-                indexing_data = pd.DataFrame(
-                    columns=tokenized_sentence.keys(),
-                    data=[tokenized_sentence.values()],
-                    dtype=pd.Int8Dtype
-                )
+                    data = pd.concat([main_data, indexing_data], axis=1, ignore_index=False)
 
-                data = pd.concat([main_data, indexing_data], axis=1, ignore_index=False)
-
-                self.database = pd.concat([self.database, data], axis=0, ignore_index=True)
-
+                    self.database = pd.concat([self.database, data], axis=0, ignore_index=True)
             except AttributeError:
-                print(f"Страница {page_id} не существует")
+                pass
             except wikipedia.exceptions.PageError:
-                print(f"Страница {page_id} не существует")
+                pass
             except wikipedia.DisambiguationError:
-                print(f"Страница {page_id} не существует")
+                pass
 
     @staticmethod
     def tokenize(sentence: str) -> dict:
         sentence = preprocessing.normalize(sentence)
-
-        print(sentence)
 
         frequency = dict(
             (word, sentence.count(word)) for word in set(sentence)
@@ -60,9 +59,16 @@ class Crawler:
 
         return frequency
 
+    def set_weights(self):
+        counter = 0
+        for column in tqdm(self.database.columns[len(self.columns):], desc="calculating weights"):
+            counter += 1
+
+            coefficient = math.log(len(self.database) / len(self.database[self.database[column] > 0]))
+            self.database[column] *= coefficient
+
     def save_database(self) -> None:
-        self.database.to_csv("data1.csv", index=False)
-        self.database.to_feather("data1")
+        tqdm(self.database.to_feather("data3"), desc="saving")
 
 
-crawler = Crawler(50)
+crawler = Crawler(40)
