@@ -15,7 +15,7 @@ class SearchEngine:
             length += len(summary.split())
         return float(length / self.number_of_records)
 
-    def search(self, query: str, amount_of_results: int) -> pd.DataFrame:
+    def search(self, query: str) -> pd.DataFrame:
         query = preprocessing.normalize(query)
 
         results = self.database[["Title", "URL", "Summary"]].copy()
@@ -43,11 +43,11 @@ class SearchEngine:
                 results[word] = column
 
         results["Overall Score"] = results.sum(numeric_only=True, axis=1)
-        return self.trim(results, amount_of_results)
+        return self.trim(results)
 
     @staticmethod
-    def trim(results: pd.DataFrame, amount_of_results: int) -> pd.DataFrame:
-        return results.sort_values("Overall Score", ascending=False, ignore_index=True).head(amount_of_results)
+    def trim(results: pd.DataFrame) -> pd.DataFrame:
+        return results[results["Overall Score"] > 0].sort_values("Overall Score", ascending=False, ignore_index=True)
 
 
 def get_title(results: pd.DataFrame, index) -> str:
@@ -63,7 +63,7 @@ def get_summary(results: pd.DataFrame, index) -> str:
 
 
 search_engine = SearchEngine("data")
-search_result = search_engine.search("superhero movie", 10)
+search_result = search_engine.search("political party")
 
 print(search_result)
-print(get_summary(search_result, 0))
+print(get_summary(search_result, 15))
