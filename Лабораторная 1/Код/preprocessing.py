@@ -3,7 +3,7 @@ import string
 
 
 def normalize(sentence: str) -> list:
-    valid_parts_of_speech = ["NN", "NNS", "NNP", "NNPS"]
+    valid_parts_of_speech = ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"]
 
     tokenizer = nltk.TweetTokenizer()
     # lemmatizer = nltk.wordnet.WordNetLemmatizer()
