@@ -72,23 +72,22 @@ def make_readable(results: pd.DataFrame) -> pd.DataFrame or None:
         return table_of_content
 
 
-def get_title(results: pd.DataFrame, index) -> str:
-    return results["Title"].iloc[index]
+def get_title(results: pd.DataFrame, index: int) -> str or None:
+    if index < len(results):
+        return results["Title"].iloc[index]
+    else:
+        return None
 
 
-def get_url(results: pd.DataFrame, index) -> str:
-    return results["URL"].iloc[index]
+def get_url(results: pd.DataFrame, index: int) -> str or None:
+    if index < len(results):
+        return results["URL"].iloc[index]
+    else:
+        return None
 
 
-def get_summary(results: pd.DataFrame, index) -> str:
-    return results["Summary"].iloc[index]
-
-
-search_engine = SearchEngine("data.feather")
-search_result = search_engine.search("united states")
-
-# print(search_result)
-print(make_readable(search_result))
-
-# for column in search_result.columns:
-#     print(search_result[column])
+def get_summary(results: pd.DataFrame, index: int) -> str or None:
+    if index < len(results):
+        return results["Summary"].iloc[index]
+    else:
+        return None
