@@ -91,3 +91,36 @@ def get_summary(results: pd.DataFrame, index: int) -> str or None:
         return results["Summary"].iloc[index]
     else:
         return None
+
+
+def get_metrics(database: pd.DataFrame, results: pd.DataFrame, b: int = 0, c: int = 0, n = 100) -> dict:
+    metrics = dict()
+    a = len(results)
+    d = len(database) - a
+
+    metrics["recall"] = a / (a + c)
+    metrics["precision"] = a / (a + b)
+    metrics["accuracy"] = (a + d) / (a + b + c + d)
+    metrics["error"] = (b + c) / (a + b + c + d)
+    metrics["f-measure"] = 2 / ((1 / metrics.get("precision")) + (1 / metrics.get("recall")))
+    if a >= n:
+        metrics[f"precision({n})"] = 1.0
+    else:
+        metrics[f"precision({n})"] = a / n
+    metrics["r-precision"] = a / (a + c)
+    metrics["average-precision"] = metrics["recall"]
+
+    point_matrix = [[x / 10, 1.0] for x in range(0, 11, 1)]
+    for point in point_matrix:
+        if point[0] > metrics.get("recall"):
+            point[1] = 0
+        elif point[0] <= metrics.get("recall"):
+            pos = a + c
+            if a >= pos:
+                point[1] = 1.0
+            else:
+                point[1] = a / n
+    metrics["point-matrix"] = point_matrix
+    metrics["precision(r)"] = sum([x[1] for x in metrics["point-matrix"]]) / 11
+
+    return metrics

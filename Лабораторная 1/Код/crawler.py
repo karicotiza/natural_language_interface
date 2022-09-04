@@ -67,7 +67,7 @@ class Crawler:
 
         return frequency
 
-    def set_weights(self):
+    def set_weights(self) -> None:
         counter = 0
         for column in tqdm(self.database.columns[len(self.columns):], desc="calculating weights"):
             counter += 1
