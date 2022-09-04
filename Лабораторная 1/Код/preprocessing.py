@@ -6,14 +6,12 @@ def normalize(sentence: str) -> list:
     valid_parts_of_speech = ["NN", "NNS", "NNP", "NNPS", "JJ", "JJR", "JJS"]
 
     tokenizer = nltk.TweetTokenizer()
-    # lemmatizer = nltk.wordnet.WordNetLemmatizer()
     stemmer = nltk.stem.LancasterStemmer()
 
     sentence = tokenizer.tokenize(sentence)
     sentence = [
         word for word in sentence if nltk.pos_tag([word])[0][1] in valid_parts_of_speech
     ]
-    # sentence = [lemmatizer.lemmatize(word).lower() for word in sentence]
     sentence = [stemmer.stem(word).lower() for word in sentence]
     sentence = [word for word in sentence if is_in_english(word)]
 
