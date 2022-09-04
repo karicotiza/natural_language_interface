@@ -1,4 +1,5 @@
 import pandas as pd
+from pprint import pprint
 
 import search
 
@@ -14,7 +15,7 @@ search_engine = search.SearchEngine("data.feather")
 for request in requests:
     search_result = search_engine.search(request)
 
-    print(
+    pprint(
         search.get_metrics(
             pd.read_feather("data.feather"),
             search_result,
