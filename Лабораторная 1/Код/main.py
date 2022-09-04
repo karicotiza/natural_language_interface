@@ -1,7 +1,10 @@
+import pandas as pd
+
 import search
 
 if __name__ == "__main__":
-    search_engine = search.SearchEngine("data.feather")
+    database = "data.feather"
+    search_engine = search.SearchEngine(database)
     while True:
         query = str(input("Query: "))
         search_result = search_engine.search(query)
@@ -14,11 +17,13 @@ if __name__ == "__main__":
                     f"0. Enter next query\n"
                     f"1. Title of entry #\n"
                     f"2. Summary of entry #\n"
+                    f"3. Get metrics"
                 )
 
                 try:
                     picked_option = int(input("Option: "))
                     if picked_option == 0:
+                        print("\n")
                         break
                     elif picked_option == 1:
                         number_of_entry = int(input("Number of entry: "))
@@ -35,6 +40,13 @@ if __name__ == "__main__":
                             print(result, "\n\n")
                         else:
                             print("Wrong number\n\n")
+                    elif picked_option == 3:
+                        for key, value in search.get_metrics(
+                            pd.read_feather(database),
+                            search_result
+                        ).items():
+                            print(f"{key}: {value}")
+                        print("\n")
                     else:
                         print("Wrong number\n\n")
                 except ValueError:
