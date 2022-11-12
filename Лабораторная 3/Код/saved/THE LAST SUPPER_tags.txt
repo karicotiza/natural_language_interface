@@ -1,0 +1,3 @@
+Название: THE LAST SUPPER
+Ключевые слова: ['jesus', 'space', 'toward', 'point', 'table', 'apostles', 'right', 'scholars', 'illusion', 'seems']
+Ссылка: C:\Users\Kur7u\OneDrive\Учеба\БГУИР\7 семестр\ЕЯзИИС\Лабораторная 3\Код\data\THE LAST SUPPER.txt

@@ -1,0 +1,3 @@
+Название: GIRL WITH A PEARL EARRING
+Ключевые слова: ['pearl', 'earring', 'girl', 'vermeer', 'young', 'woman', 'painting', 'works', 'work', 'subject']
+Ссылка: C:\Users\Kur7u\OneDrive\Учеба\БГУИР\7 семестр\ЕЯзИИС\Лабораторная 3\Код\data\GIRL WITH A PEARL EARRING.txt

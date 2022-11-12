@@ -1,0 +1,12 @@
+Название: THE LAST SUPPER
+#1: The subject of the Last Supper was a popular choice for the refectory walls of monasteries and convents in 15th-century Italy, whereby nuns and monks could have their meals in the presence of Jesus’ final repast.
+#2: Leonardo’s version appears neatly arranged, with Jesus at the centre of an extensive table and the Apostles to his left and right.
+#3: Some scholars have proposed that the light from the window behind him serves this role or that the implied lines of the pediment above the window create the illusion of a halo.
+#4: Other scholars have argued that the missing attribute may also suggest that Jesus is still a human being, who, as such, will endure the pain and suffering of the Passion.
+#5: Jesus has declared his forthcoming betrayal, and the Apostles react.
+#6: Philip, who stands in the group to Jesus’ left, gestures toward himself and seems to say, “Surely not I, Lord?” Jesus seems to reply, “The one who has dipped his hand into the bowl with me will betray me” (Matthew 26:23).
+#7: Simultaneously, Jesus and Judas, who sits with the group to Jesus’ right, reach toward the same dish on the table between them, an act that marks Judas as the betrayer.
+#8: Jesus also gestures toward a glass of wine and a piece of bread, suggesting the establishment of the Holy Communion rite.
+#9: Peter, who is identified by the knife in his hand that he will later use to sever the ear of a soldier attempting to arrest Jesus, moves toward the mild-tempered John, who sits to Jesus’ right and appears to swoon.
+#10: Judas, gripping the purse that contains his reward for identifying Jesus, recoils from Peter, seemingly alarmed at the other Apostle’s quick action.The rest of the Apostles appear to whisper, grieve, and debate among themselves.
+Ссылка: C:\Users\Kur7u\OneDrive\Учеба\БГУИР\7 семестр\ЕЯзИИС\Лабораторная 3\Код\data\THE LAST SUPPER.txt

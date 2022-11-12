@@ -1,0 +1,12 @@
+Название: MONA LISA
+#1: The painting presents a woman in half-body portrait, which has as a backdrop a distant landscape.
+#2: Yet this simple description of a seemingly standard composition gives little sense of Leonardo’s achievement.
+#3: The three-quarter view, in which the sitter’s position mostly turns toward the viewer, broke from the standard profile pose used in Italian art and quickly became the convention for all portraits, one used well into the 21st century.
+#4: The subject’s softly sculptural face shows Leonardo’s skillful handling of sfumato (use of fine shading) and reveals his understanding of the musculature and the skull beneath the skin.
+#5: The delicately painted veil, the finely wrought tresses, and the careful rendering of folded fabric demonstrate Leonardo’s studied observations and inexhaustible patience.
+#6: Moreover, the sensuous curves of the sitter’s hair and clothing are echoed in the shapes of the valleys and rivers behind her.
+#7: The sense of overall harmony achieved in the painting—especially apparent in the sitter’s faint smile—reflects Leonardo’s idea of the cosmic link connecting humanity and nature, making this painting an enduring record of Leonardo’s vision.
+#8: In its exquisite synthesis of sitter and landscape, the Mona Lisa set the standard for all future portraits.
+#9: There has been much speculation and debate regarding the identity of the portrait’s sitter.
+#10: Scholars and historians have posited numerous interpretations, including that she is Lisa del Giocondo (née Gherardini), the wife of the Florentine merchant Francesco di Bartolomeo del Giocondo, hence the alternative title to the work, La Gioconda.
+Ссылка: C:\Users\Kur7u\OneDrive\Учеба\БГУИР\7 семестр\ЕЯзИИС\Лабораторная 3\Код\data\MONA LISA.txt

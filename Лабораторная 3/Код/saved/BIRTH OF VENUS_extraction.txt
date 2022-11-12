@@ -1,0 +1,12 @@
+Название: BIRTH OF VENUS
+#1: Birth of Venus, painting by Sandro Botticelli completed about 1485.
+#2: Birth of Venus is one of the most famous paintings in the world.
+#3: It was painted by Alessandro di Mariano Filipepi, known as Sandro Botticelli, who was an Italian painter of the Florentine School.
+#4: He served an apprenticeship under Fra Filippo Lippi, the best Florentine painter of that time.
+#5: Botticelli made his name with his painting Allegory of Fortitude (1470), and he was subsequently commissioned to paint Birth of Venus for Lorenzo the Magnificent of the Medici family.
+#6: In mythology, Venus was conceived when the Titan Cronus castrated his father, the god Uranus, whose severed genitals fertilized the sea.
+#7: Birth of Venus depicts the moment when, having emerged from the sea in a shell, Venus lands at Paphos in Cyprus.
+#8: She is attended by two winds who blow her toward the shore, while a nymph is poised to wrap a cloak, decorated with spring flowers, around Venus to cover her nudity.
+#9: The stance of Venus is believed to be based on classical statuary, which was highly prized in Florence at that time.
+#10: Despite the unusual proportions of her body—the elongated neck and her overlong left arm—Venus is an arrestingly beautiful figure with her delicate skin and soft-flowing curls fresh from the sea.
+Ссылка: C:\Users\Kur7u\OneDrive\Учеба\БГУИР\7 семестр\ЕЯзИИС\Лабораторная 3\Код\data\BIRTH OF VENUS.txt

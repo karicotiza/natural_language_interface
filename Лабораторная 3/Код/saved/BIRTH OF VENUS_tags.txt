@@ -1,0 +1,3 @@
+Название: BIRTH OF VENUS
+Ключевые слова: ['venus', 'birth', 'botticelli', 'painting', 'sandro', 'most', 'world', 'painter', 'florentine', 'time']
+Ссылка: C:\Users\Kur7u\OneDrive\Учеба\БГУИР\7 семестр\ЕЯзИИС\Лабораторная 3\Код\data\BIRTH OF VENUS.txt

@@ -1,0 +1,3 @@
+Название: MONA LISA
+Ключевые слова: ['painting', 'standard', 'lisa', 'been', 'identity', 'woman', 'landscape', 'this', 'sense', 'used']
+Ссылка: C:\Users\Kur7u\OneDrive\Учеба\БГУИР\7 семестр\ЕЯзИИС\Лабораторная 3\Код\data\MONA LISA.txt
